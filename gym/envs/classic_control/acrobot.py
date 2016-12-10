@@ -92,7 +92,7 @@ class AcrobotEnv(core.Env):
         return [seed]
 
     def _reset(self):
-        self.state = self.np_random.uniform(low=-0.1, high=0.1, size=(4,))
+        self.state = self.round_to_dp(self.np_random.uniform(low=-0.1, high=0.1, size=(4,))
         return self._get_ob()
 
     def _step(self, a):
@@ -130,11 +130,14 @@ class AcrobotEnv(core.Env):
 
     def _get_ob(self):
         s = self.state
-        return np.array([cos(s[0]), np.sin(s[0]), cos(s[1]), sin(s[1]), s[2], s[3]])
+        return self.round_to_dp(np.array([cos(s[0]), np.sin(s[0]), cos(s[1]), sin(s[1]), s[2], s[3]]))
 
     def _terminal(self):
         s = self.state
         return bool(-np.cos(s[0]) - np.cos(s[1] + s[0]) > 1.)
+
+    def round_to_dp(self, arr):
+        return np.array(map(lambda x: int(x*10)/10.0, arr))
 
     def _dsdt(self, s_augmented, t):
         m1 = self.LINK_MASS_1
