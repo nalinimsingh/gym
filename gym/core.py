@@ -124,6 +124,10 @@ class Env(object):
         done = self.monitor._after_step(observation, reward, done, info)
         return observation, reward, done, info
 
+    def hop_to(self,target_state):
+        self.state = target_state
+        print self.state
+
     def reset(self):
         """Resets the state of the environment and returns an initial
         observation. Will call 'configure()' if not already called.
