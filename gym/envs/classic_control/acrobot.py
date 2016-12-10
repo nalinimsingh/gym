@@ -122,7 +122,10 @@ class AcrobotEnv(core.Env):
         ns[3] = bound(ns[3], -self.MAX_VEL_2, self.MAX_VEL_2)
         self.state = ns
         terminal = self._terminal()
-        reward = -1. if not terminal else 0.
+        if terminal:
+            reward = 0.
+        else:
+            reward = (-np.cos(s[0]) - np.cos(s[1] + s[0])-1)/3.0
         return (self._get_ob(), reward, terminal, {})
 
     def _get_ob(self):
