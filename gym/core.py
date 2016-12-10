@@ -126,7 +126,6 @@ class Env(object):
 
     def hop_to(self,target_state):
         self.state = target_state
-        print self.state
 
     def reset(self):
         """Resets the state of the environment and returns an initial
