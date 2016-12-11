@@ -95,7 +95,7 @@ class AcrobotEnv(core.Env):
         return self.round_to_dp(self.state)
 
     def _reset(self):
-        self.state = self.round_to_dp(self.np_random.uniform(low=-0.1, high=0.1, size=(4,))
+        self.state = self.round_to_dp(self.np_random.uniform(low=-0.1, high=0.1, size=(4,)))
         return self._get_ob()
 
     def _step(self, a):
